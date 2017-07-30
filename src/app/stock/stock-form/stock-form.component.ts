@@ -10,7 +10,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 })
 export class StockFormComponent implements OnInit {
 
-  stock: Stock;
+  stock: Stock = new Stock(0, "", 0, 0, "", []);
 
   categories = ["IT", "Internet", "Finance"];
 
@@ -23,20 +23,36 @@ export class StockFormComponent implements OnInit {
 
   ngOnInit() {
     let stockId = this.routeInfo.snapshot.params['id'];
-    this.stock = this.stockService.getStock(stockId);
+    //this.stock = this.stockService.getStock(stockId);
 
     let fb = new FormBuilder();
 
     this.formModel = fb.group(
       {
-        name: [this.stock.name, [Validators.required, Validators.minLength(3)]],
-        price: [this.stock.price, [Validators.required]],
-        desc: [this.stock.desc],
+        name: ['', [Validators.required, Validators.minLength(3)]],
+        price: ['', [Validators.required]],
+        desc: [''],
         categories: fb.array([
-          new FormControl(this.stock.categories.indexOf(this.categories[0]) != -1),
-          new FormControl(this.stock.categories.indexOf(this.categories[1]) != -1),
-          new FormControl(this.stock.categories.indexOf(this.categories[2]) != -1)
+          new FormControl(false),
+          new FormControl(false),
+          new FormControl(false)
         ], this.categoriesValidator)
+      }
+    );
+
+    this.stockService.getStock(stockId).subscribe(
+      data => {
+        this.stock = data;
+        this.formModel.reset({
+          name: data.name,
+          price: data.price,
+          desc: data.desc,
+          categories: [
+            data.categories.indexOf(this.categories[0]) != -1,
+            data.categories.indexOf(this.categories[1]) != -1,
+            data.categories.indexOf(this.categories[2]) != -1,
+          ]
+        })
       }
     );
   }
