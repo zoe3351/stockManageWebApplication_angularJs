@@ -1,4 +1,6 @@
-# Auction
+# stockManageWebApplication_angularJs
+
+This is an Angular Js (using Angular 4) web application supporting basic operations to stock information: Create, Retrieve, Update and Delete. It covers the typical features of AngularJs including components, data binding, routing, pipes, directives, lifecycle hooks etc, and could be connected with a backend server. The integrated application (with a simple node.js backend server) of the application is in another repository: stockManage.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0.
 
