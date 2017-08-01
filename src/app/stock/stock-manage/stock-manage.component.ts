@@ -3,7 +3,6 @@ import {Router} from "@angular/router";
 import {Stock, StockService} from "../stock.service";
 import {FormControl} from "@angular/forms";
 import 'rxjs/Rx';
-import {Observable} from "rxjs/Observable";
 
 @Component({
   selector: 'app-stock-manage',
@@ -11,7 +10,7 @@ import {Observable} from "rxjs/Observable";
   styleUrls: ['./stock-manage.component.css']
 })
 export class StockManageComponent implements OnInit {
-  private stocks: Observable<Stock[]>;
+  private stocks: Array<Stock>;
 
   private nameFilter: FormControl = new FormControl();
 

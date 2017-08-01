@@ -22,7 +22,7 @@
         <th>Stock Rating</th>
         <th>Options</th>
       </tr>
-      <tr *ngFor="let stock of stocks | async; let i = index;">
+      <tr *ngFor="let stock of stocks | stockFilter : 'name': keyWord; let i = index;">
         <td>{{i + 1}}</td>
         <td>{{stock.name}}</td>
         <td>{{stock.price}}</td>
